@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+  employees:
+    image: employees
+    build: ./
+    container_name: employees
+    ports:
+      - "8081:8081"
+    environment:
+      - EMPLOYEES_DB_CONN_STR=postgresql://admin:255+1@employees-db:5432/employees
+    depends_on:
+      - employees-db
+    networks:
+      - employees_network
+
+  employees-db:
+    image: docker.io/bitnami/postgresql:15
+    container_name: employees-db
+    volumes:
+      - './postgresql_data:/bitnami/postgresql'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRESQL_PGAUDIT_LOG: READ,WRITE
+      POSTGRESQL_USERNAME: "admin"
+      POSTGRESQL_PASSWORD: "255+1"
+      POSTGRESQL_DATABASE: "employees"
+    networks:
+      - employees_network
+
+networks:
+  employees_network:
