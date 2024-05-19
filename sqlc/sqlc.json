@@ -1,0 +1,20 @@
+{
+    "version": "2",
+	"sql": [
+		{
+			"engine": "postgresql",
+			"schema": "../migrations",
+			"gen": {
+				"go": {
+					"package": "employee",
+					"out": "../internal/repositories/employee/queries",
+					"sql_package": "pgx/v5",
+					"emit_json_tags": true,
+					"emit_interface": true,
+					"omit_unused_structs": true
+				}
+			},
+			"queries": "../internal/repositories/employee/queries/queries.sql"
+		}
+    ]
+}

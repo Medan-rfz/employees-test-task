@@ -11,6 +11,11 @@ run:
 sqlc-gen:
 	cd ./sqlc && sqlc generate
 
+############################################
+# Swagger
+############################################ 
+swagger-gen:
+	swag init -g server.go -d "./internal/servers/http,./internal/controllers/employee,./internal/entities,./internal/dto"
 
 ############################################
 # Migrations

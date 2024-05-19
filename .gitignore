@@ -9,6 +9,7 @@
 
 *.out
 
-vendor/
-
 go.work
+
+vendor/
+postgresql_data/

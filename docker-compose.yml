@@ -18,8 +18,6 @@ services:
     container_name: employees-db
     volumes:
       - './postgresql_data:/bitnami/postgresql'
-    ports:
-      - 5432:5432
     environment:
       POSTGRESQL_PGAUDIT_LOG: READ,WRITE
       POSTGRESQL_USERNAME: "admin"

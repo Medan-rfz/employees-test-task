@@ -15,11 +15,11 @@ if [ ! -e /$CONTAINER_FIRST_STARTUP ]; then
             break
         else
             echo "Db reconnect... [Try: $attempt]"
-            sleep 1
+            sleep 2
         fi
         
         attempt=$((attempt+1))
     done
 fi
 
-exec app
+exec employees

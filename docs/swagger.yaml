@@ -1,0 +1,239 @@
+definitions:
+  dto.DepartmentDTO:
+    properties:
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  dto.EmployeeDTO:
+    properties:
+      companyId:
+        type: integer
+      department:
+        $ref: '#/definitions/dto.DepartmentDTO'
+      id:
+        type: integer
+      name:
+        type: string
+      passport:
+        $ref: '#/definitions/dto.PassportDTO'
+      phone:
+        type: string
+      surname:
+        type: string
+    type: object
+  dto.PassportDTO:
+    properties:
+      number:
+        type: string
+      type:
+        type: string
+    type: object
+  employee_controller.addBodyReq:
+    properties:
+      companyId:
+        type: integer
+      department:
+        $ref: '#/definitions/entities.Department'
+      name:
+        type: string
+      passport:
+        $ref: '#/definitions/entities.Passport'
+      phone:
+        type: string
+      surname:
+        type: string
+    type: object
+  employee_controller.addBodyResp:
+    properties:
+      employeeId:
+        type: integer
+    type: object
+  employee_controller.deleteBodyReq:
+    properties:
+      employeeId:
+        type: integer
+    type: object
+  employee_controller.getByCompanyBodyReq:
+    properties:
+      companyId:
+        type: integer
+    type: object
+  employee_controller.getByCompanyBodyResp:
+    properties:
+      employees:
+        items:
+          $ref: '#/definitions/entities.Employee'
+        type: array
+    type: object
+  employee_controller.getByCompanyDepartmentBodyReq:
+    properties:
+      companyId:
+        type: integer
+      departmentName:
+        type: string
+    type: object
+  employee_controller.getByCompanyDepartmentBodyResp:
+    properties:
+      employees:
+        items:
+          $ref: '#/definitions/entities.Employee'
+        type: array
+    type: object
+  entities.Department:
+    properties:
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  entities.Employee:
+    properties:
+      companyId:
+        type: integer
+      department:
+        $ref: '#/definitions/entities.Department'
+      id:
+        type: integer
+      name:
+        type: string
+      passport:
+        $ref: '#/definitions/entities.Passport'
+      phone:
+        type: string
+      surname:
+        type: string
+    type: object
+  entities.Passport:
+    properties:
+      number:
+        type: string
+      type:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /employee/add:
+    post:
+      consumes:
+      - application/json
+      description: Add employee
+      parameters:
+      - description: employee data
+        in: body
+        name: Employee
+        required: true
+        schema:
+          $ref: '#/definitions/employee_controller.addBodyReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employee_controller.addBodyResp'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      tags:
+      - Employee
+  /employee/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Remove employee by ID
+      parameters:
+      - description: employee data
+        in: body
+        name: Employee
+        required: true
+        schema:
+          $ref: '#/definitions/employee_controller.deleteBodyReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      tags:
+      - Employee
+  /employee/get/by_company:
+    post:
+      consumes:
+      - application/json
+      description: Get employee by company ID
+      parameters:
+      - description: employee data
+        in: body
+        name: Employee
+        required: true
+        schema:
+          $ref: '#/definitions/employee_controller.getByCompanyBodyReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employee_controller.getByCompanyBodyResp'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      tags:
+      - Employee
+  /employee/get/by_company_department:
+    post:
+      consumes:
+      - application/json
+      description: Get employee by company ID and department name
+      parameters:
+      - description: employee data
+        in: body
+        name: Employee
+        required: true
+        schema:
+          $ref: '#/definitions/employee_controller.getByCompanyDepartmentBodyReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employee_controller.getByCompanyDepartmentBodyResp'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      tags:
+      - Employee
+  /employee/update:
+    post:
+      consumes:
+      - application/json
+      description: Update employee data
+      parameters:
+      - description: employee data
+        in: body
+        name: Employee
+        required: true
+        schema:
+          $ref: '#/definitions/dto.EmployeeDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      tags:
+      - Employee
+swagger: "2.0"

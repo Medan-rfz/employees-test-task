@@ -6,8 +6,8 @@ RUN make build
 
 FROM alpine
 COPY --from=builder /go/bin/ /go/bin/
-COPY --from=builder /go/app /go/bin/
 COPY --from=builder /go/scripts/ /go/scripts/
+COPY --from=builder /go/docs /go/docs
 COPY --from=builder /go/migrations/ /go/migrations/
 COPY --from=builder /go/Makefile /go/Makefile
 
